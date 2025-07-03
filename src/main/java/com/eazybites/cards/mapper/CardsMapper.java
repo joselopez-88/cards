@@ -13,12 +13,16 @@ public interface CardsMapper {
 
     CardsResponseDto mapToCardsResponseDto(Cards cards);
     @Mapping(target = "cardId", ignore = true)
+    @Mapping(target = "amountUsed", ignore = true)
+    @Mapping(target = "availableAmount", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "updatedBy", ignore = true)
     Cards mapToCards(CardsUpdateRequestDto cardsDto);
     @Mapping(target = "cardId", ignore = true)
+    @Mapping(target = "amountUsed", ignore = true)
+    @Mapping(target = "availableAmount", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
