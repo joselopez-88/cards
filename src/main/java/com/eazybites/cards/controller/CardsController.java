@@ -1,5 +1,7 @@
 package com.eazybites.cards.controller;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,11 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eazybites.cards.constants.CardsConstants;
+import com.eazybites.cards.model.CardsContactInfoDto;
 import com.eazybites.cards.model.dto.request.CardsUpdateRequestDto;
 import com.eazybites.cards.model.dto.response.CardsResponseDto;
 import com.eazybites.cards.model.dto.response.ResponseDto;
 import com.eazybites.cards.service.ICardsService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +34,13 @@ import lombok.RequiredArgsConstructor;
 public class CardsController {
 
     private final ICardsService iCardsService;
+
+    @Value("${build.version}")
+    private String buildVersion;
+
+    private final Environment environment;
+
+    private final CardsContactInfoDto contactInfo;
 
     @PostMapping("/create")
     public ResponseEntity<ResponseDto> createCard(
@@ -68,4 +80,23 @@ public class CardsController {
                         new ResponseDto(HttpStatus.OK.getReasonPhrase(), HttpStatus.OK.value(),
                                 CardsConstants.MESSAGE_200));
     }
+
+    @Operation(
+        summary = "Get Build Version Rest Api",
+        description = "Get Build Version details in EazyBank"
+    )
+    @ApiResponse(responseCode = "200", description = "OK")
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildVersion() {
+        return ResponseEntity.ok().body(buildVersion);
+    }
+    @GetMapping("/java-home")
+    public ResponseEntity<String> getJavaHome(){
+        return ResponseEntity.ok().body(environment.getProperty("JAVA_HOME"));
+    }
+    @GetMapping("/contact-info")
+    public ResponseEntity<CardsContactInfoDto> getContactInfo() {
+        return ResponseEntity.ok().body(contactInfo);
+    }
+
 }
