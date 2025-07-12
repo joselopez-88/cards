@@ -16,22 +16,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  config:
-    import:
-    - "application_qa.yml"
-    - "application_prod.yml"
   profiles:
     active:
-    - "qa"   
-build:
-  version: "1.1"
-cards:
-  message: "Welcome to EazyBank cards development environment"
-  contactDetails:
-    name: "Marco Salinas - Backend Developer"
-    email: "marco.salinas@eazybank.dev"
-  onCallSupport:
-    - "(123)456-7890"
-    - "(987)654-3210"
-
+    - "prod"
+  config:
+    import:
+    - "optional:configserver:http://localhost:8071/"
 
