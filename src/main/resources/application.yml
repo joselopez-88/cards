@@ -22,4 +22,10 @@ spring:
   config:
     import:
     - "optional:configserver:http://localhost:8071/"
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+# Expone todos los endpoints de gestionde la aplicación en el puerto 8080 usando el prefijo "/actuator"
+        - "*"    
