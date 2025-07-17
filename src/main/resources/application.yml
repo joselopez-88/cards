@@ -22,12 +22,7 @@ spring:
   config:
     import:
     - "optional:configserver:http://localhost:8071/"
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    # "guest" es el valor por defecto del username y password de RabbitMQ
-    username: "guest"
-    password: "guest"    
+
 management:
   endpoints:
     web:
