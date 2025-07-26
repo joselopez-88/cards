@@ -5,9 +5,9 @@ spring:
     name: cards
   datasource:
     url: jdbc:mysql://localhost:3308/cardsdb
-    #driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     #database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
@@ -20,7 +20,7 @@ spring:
     - "prod"
   config:
     import:
-    - "configserver:http://localhost:8071/"
+    - "configserver:http://configserver:8071/"
 
 management:
   endpoints:
