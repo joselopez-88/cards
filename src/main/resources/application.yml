@@ -3,6 +3,7 @@ server:
 spring:
   application:
     name: cards
+# Configuracion de la base de datos    
   datasource:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
@@ -11,25 +12,48 @@ spring:
   h2:
     console:
       enabled: true
+# Configuracion de JPA      
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
     show-sql: true
+# Estableciendo el perfil    
   profiles:
     active:
     - "prod"
+# Configuracion de conexion al configserver    
   config:
     import:
     - "optional:configserver:http://localhost:8071/"
+# Configuracion de actuator    
 management:
   endpoints:
     web:
       exposure:
         include:
-# Expone todos los endpoints de gestion de la aplicación en el puerto 8080 usando el prefijo "/actuator"
-# Para actualizar los properties usando @ConfigurationProperties es "refresh" /actuator/refresh - se ejecuta en cada microservicio a actualizar
-# Para conectar con RabbitMQ requiere "bus-refresh" /actuator/busrefresh - Se ejecuta una sola vez y se actualiza en todos los microservicios
-# siempre y cuando todos esten conectados a RabbitMQ
-# "*" significa todos  
-        - "*"
+        - health
+        - info
+## permite acceder al endpoint /actuator/shutdown desde cualquier origen sin autenticación
+  endpoint:
+    shutdown:
+      access: unrestricted
+## Agrega automáticamente al endpoint /actuator/info todas las variables de entorno disponibles
+  info:
+    env:
+      enabled: true
+#Configuracion eureka
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+#Configuracion informacion mostrada en el endpoint de actuator /actuator/info
+info:
+  app:
+    name: "cards"
+    description: "EazyBank Cards Application"
+    version: "1.0.0"
