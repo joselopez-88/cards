@@ -12,7 +12,7 @@ spring:
   h2:
     console:
       enabled: true
-# Configuracion de JPA      
+# Configuracion de JPA   
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
@@ -22,7 +22,7 @@ spring:
   profiles:
     active:
     - "prod"
-# Configuracion de conexion al configserver    
+# Configuracion de conexion al configserver
   config:
     import:
     - "optional:configserver:http://localhost:8071/"
