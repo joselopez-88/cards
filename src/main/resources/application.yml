@@ -58,3 +58,9 @@ info:
     name: "cards"
     description: "EazyBank Cards Application"
     version: "1.0.0"
+#Estableciendo la configuracion de logging DEBUG en el paquete com.eazybites.cards del proyecto
+logging:
+  level:
+    com:
+      eazybites:
+        cards: DEBUG
