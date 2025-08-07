@@ -35,10 +35,19 @@ management:
         - health
         - info
         - shutdown
+# Activando la comprobacion de estado del microservicio        
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true        
 ## permite acceder al endpoint /actuator/shutdown desde cualquier origen sin autenticación
   endpoint:
     shutdown:
       access: unrestricted
+    health:
+      probes:
+        enabled: true      
 ## Agrega automáticamente al endpoint /actuator/info todas las variables de entorno disponibles
   info:
     env:
