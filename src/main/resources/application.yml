@@ -35,6 +35,8 @@ management:
         - health
         - info
         - shutdown
+        - metrics
+        - prometheus
 # Activando la comprobacion de estado del microservicio        
   health:
     readinessstate:
@@ -52,6 +54,10 @@ management:
   info:
     env:
       enabled: true
+## Agregar una etiqueta (tag) personalizada a todas las métricas que genera Actuator en micrometer llamado application como valor el nombre del microservicio
+  metrics:
+    tags:
+      application: ${spring.application.name}
 #Configuracion eureka
 eureka:
   instance:
