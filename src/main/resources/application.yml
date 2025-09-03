@@ -79,3 +79,6 @@ logging:
     com:
       eazybites:
         cards: DEBUG
+# Estableciendo un patron de log personalizado para el microservicio
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
